@@ -1,7 +1,24 @@
+# CUSTOM
+*.csv
+node_modules/
+requests/
+requests-2.23.0.dist-info/
+lambdaFunctions/requests/
+serverless.yml
+chardet/
+chardet-3.0.4.dist-info/
+idna/
+idna-2.9.dist-info/
+soupsieve-2.0.dist-info/
+soupsieve/
+urllib3-1.25.8.dist-info/
+urllib3/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+
 
 # C extensions
 *.so
@@ -26,6 +43,16 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+urllib3/
+lambdaFunctions/urllib3/
+beautifulsoup4-4.8.2.dist-info/
+bi
+bs4
+bs4-0.0.1-py3.8.egg-info
+certifi
+certifi-2019.11.28.dist-info/
+bin/
+package-lock.json
 
 # PyInstaller
 #  Usually these files are written by a python script from a template

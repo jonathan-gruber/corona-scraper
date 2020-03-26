@@ -1,0 +1,443 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>CoronaStats JG</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<link rel="stylesheet" href="css/golden.css" class="colors">
+	<link rel="shortcut icon" href="img/favico.png" sizes="32x32" type="image/png" />
+	<link rel="stylesheet" href="css/chart.css">
+
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/corona.js"></script>
+
+	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.19.min.js"></script>
+	<script src="js/Chart.js"></script>
+
+
+</head>
+
+<body id="home">
+
+	<div id="header">
+		<div class="header-content">
+			<h1>Corona Daily Statistics</h1>
+			<div class="countdown" id="countdown">
+				<div class="container">
+					<div class="row">
+						<div class="countdown-item col-sm-3 col-xs-3">
+							<div class="countdown-number" id="country1">Israel</div>
+							<div class="countdown-label"></div>
+						</div>
+
+						<div class="countdown-item col-sm-3 col-xs-3">
+							<div class="countdown-number" id="total-1">01</div>
+							<div class="countdown-label">Total Cases</div>
+						</div>
+
+						<div class="countdown-item col-sm-3 col-xs-3">
+							<div class="countdown-number" id="new-cases-1">51%</div>
+							<div class="countdown-label">New Cases</div>
+						</div>
+
+						<div class="countdown-item col-sm-3 col-xs-3">
+							<div class="countdown-number" id="deaths-1">44</div>
+							<div class="countdown-label">Total Deaths</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="countdown" id="countdown">
+				<div class="container">
+					<div class="row">
+						<div class="countdown-item col-sm-3 col-xs-3">
+							<div class="countdown-number" id="country2">France</div>
+							<div class="countdown-label"></div>
+						</div>
+
+						<div class="countdown-item col-sm-3 col-xs-3">
+							<div class="countdown-number" id="total-2">02</div>
+							<div class="countdown-label">Total Cases</div>
+						</div>
+
+						<div class="countdown-item col-sm-3 col-xs-3">
+							<div class="countdown-number" id="new-cases-2">51%</div>
+							<div class="countdown-label">New Cases</div>
+						</div>
+
+						<div class="countdown-item col-sm-3 col-xs-3">
+							<div class="countdown-number" id="deaths-2">44</div>
+							<div class="countdown-label">Total Deaths</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="countdown" id="countdown">
+				<div class="container">
+					<div class="row">
+						<div class="countdown-item col-sm-3 col-xs-3">
+							<div class="countdown-number" id="country3">Total:</div>
+							<div class="countdown-label"></div>
+						</div>
+
+						<div class="countdown-item col-sm-3 col-xs-3">
+							<div class="countdown-number" id="total-3">00</div>
+							<div class="countdown-label">Total Cases</div>
+						</div>
+
+						<div class="countdown-item col-sm-3 col-xs-3">
+							<div class="countdown-number" id="new-cases-3">0%</div>
+							<div class="countdown-label">New Cases</div>
+						</div>
+
+						<div class="countdown-item col-sm-3 col-xs-3">
+							<div class="countdown-number" id="deaths-3">0</div>
+							<div class="countdown-label">Total Deaths</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4">
+					<h1>Select Country 1</h1>
+
+					<select id="selected-country-1" name="custom country" class="form-control">
+						<option value="Total:">Total:</option>
+						<option value="Argentina">Argentina</option>
+						<option value="Australia">Australia</option>
+						<option value="Austria">Austria</option>
+						<option value="Belgium">Belgium</option>
+						<option value="Bolivia">Bolivia</option>
+						<option value="Brazil">Brazil</option>
+						<option value="Bulgaria">Bulgaria</option>
+						<option value="Canada">Canada</option>
+						<option value="Chile">Chile</option>
+						<option value="China">China</option>
+						<option value="Colombia">Colombia</option>
+						<option value="Congo">Congo</option>
+						<option value="Croatia">Croatia</option>
+						<option value="Cuba">Cuba</option>
+						<option value="Czechia">Czechia</option>
+						<option value="Denmark">Denmark</option>
+						<option value="Diamond Princess">Diamond Princess</option>
+						<option value="Egypt">Egypt</option>
+						<option value="Equatorial Guinea">Equatorial Guinea</option>
+						<option value="Ethiopia">Ethiopia</option>
+						<option value="Finland">Finland</option>
+						<option value="France">France</option>
+						<option value="Georgia">Georgia</option>
+						<option value="Germany">Germany</option>
+						<option value="Greece">Greece</option>
+						<option value="Guinea">Guinea</option>
+						<option value="Hong Kong">Hong Kong</option>
+						<option value="Hungary">Hungary</option>
+						<option value="Iceland">Iceland</option>
+						<option value="India">India</option>
+						<option value="Indonesia">Indonesia</option>
+						<option value="Iran">Iran</option>
+						<option value="Iraq">Iraq</option>
+						<option value="Ireland">Ireland</option>
+						<option value="Israel" selected>Israel</option>
+						<option value="Italy">Italy</option>
+						<option value="Ivory Coast">Ivory Coast</option>
+						<option value="Japan">Japan</option>
+						<option value="Jordan">Jordan</option>
+						<option value="Kenya">Kenya</option>
+						<option value="Kuwait">Kuwait</option>
+						<option value="Lebanon">Lebanon</option>
+						<option value="Malaysia">Malaysia</option>
+						<option value="Mexico">Mexico</option>
+						<option value="Montenegro">Montenegro</option>
+						<option value="Morocco">Morocco</option>
+						<option value="Nepal">Nepal</option>
+						<option value="Netherlands">Netherlands</option>
+						<option value="New Zealand">New Zealand</option>
+						<option value="Nigeria">Nigeria</option>
+						<option value="Norway">Norway</option>
+						<option value="Pakistan">Pakistan</option>
+						<option value="Palestine">Palestine</option>
+						<option value="Paraguay">Paraguay</option>
+						<option value="Peru">Peru</option>
+						<option value="Philippines">Philippines</option>
+						<option value="Poland">Poland</option>
+						<option value="Portugal">Portugal</option>
+						<option value="Qatar">Qatar</option>
+						<option value="Romania">Romania</option>
+						<option value="Russia">Russia</option>
+						<option value="Rwanda">Rwanda</option>
+						<option value="S. Korea">S. Korea</option>
+						<option value="Saudi Arabia">Saudi Arabia</option>
+						<option value="Senegal">Senegal</option>
+						<option value="Serbia">Serbia</option>
+						<option value="Singapore">Singapore</option>
+						<option value="Slovenia">Slovenia</option>
+						<option value="Somalia">Somalia</option>
+						<option value="South Africa">South Africa</option>
+						<option value="Spain">Spain</option>
+						<option value="Sri Lanka">Sri Lanka</option>
+						<option value="Sudan">Sudan</option>
+						<option value="Sweden">Sweden</option>
+						<option value="Switzerland">Switzerland</option>
+						<option value="Taiwan">Taiwan</option>
+						<option value="Tanzania">Tanzania</option>
+						<option value="Thailand">Thailand</option>
+						<option value="Togo">Togo</option>
+						<option value="Tunisia">Tunisia</option>
+						<option value="Turkey">Turkey</option>
+						<option value="UAE">UAE</option>
+						<option value="UK">UK</option>
+						<option value="Ukraine">Ukraine</option>
+						<option value="Uruguay">Uruguay</option>
+						<option value="USA">USA</option>
+						<option value="Uzbekistan">Uzbekistan</option>
+						<option value="Vatican City">Vatican City</option>
+						<option value="Venezuela">Venezuela</option>
+						<option value="Vietnam">Vietnam</option>
+						<option value="Zambia">Zambia</option>
+					</select>
+				</div>
+				<div class="col-md-4">
+					<h1>Select Country 2</h1>
+					<select id="selected-country-2" name="custom country" class="form-control">
+						<option value="Total:">Total:</option>
+						<option value="Argentina">Argentina</option>
+						<option value="Australia">Australia</option>
+						<option value="Austria">Austria</option>
+						<option value="Belgium">Belgium</option>
+						<option value="Bolivia">Bolivia</option>
+						<option value="Brazil">Brazil</option>
+						<option value="Bulgaria">Bulgaria</option>
+						<option value="Canada">Canada</option>
+						<option value="Chile">Chile</option>
+						<option value="China">China</option>
+						<option value="Colombia">Colombia</option>
+						<option value="Congo">Congo</option>
+						<option value="Croatia">Croatia</option>
+						<option value="Cuba">Cuba</option>
+						<option value="Czechia">Czechia</option>
+						<option value="Denmark">Denmark</option>
+						<option value="Diamond Princess">Diamond Princess</option>
+						<option value="Egypt">Egypt</option>
+						<option value="Equatorial Guinea">Equatorial Guinea</option>
+						<option value="Ethiopia">Ethiopia</option>
+						<option value="Finland">Finland</option>
+						<option value="France" selected>France</option>
+						<option value="Georgia">Georgia</option>
+						<option value="Germany">Germany</option>
+						<option value="Greece">Greece</option>
+						<option value="Guinea">Guinea</option>
+						<option value="Hong Kong">Hong Kong</option>
+						<option value="Hungary">Hungary</option>
+						<option value="Iceland">Iceland</option>
+						<option value="India">India</option>
+						<option value="Indonesia">Indonesia</option>
+						<option value="Iran">Iran</option>
+						<option value="Iraq">Iraq</option>
+						<option value="Ireland">Ireland</option>
+						<option value="Israel">Israel</option>
+						<option value="Italy">Italy</option>
+						<option value="Ivory Coast">Ivory Coast</option>
+						<option value="Japan">Japan</option>
+						<option value="Jordan">Jordan</option>
+						<option value="Kenya">Kenya</option>
+						<option value="Kuwait">Kuwait</option>
+						<option value="Lebanon">Lebanon</option>
+						<option value="Malaysia">Malaysia</option>
+						<option value="Mexico">Mexico</option>
+						<option value="Montenegro">Montenegro</option>
+						<option value="Morocco">Morocco</option>
+						<option value="Nepal">Nepal</option>
+						<option value="Netherlands">Netherlands</option>
+						<option value="New Zealand">New Zealand</option>
+						<option value="Nigeria">Nigeria</option>
+						<option value="Norway">Norway</option>
+						<option value="Pakistan">Pakistan</option>
+						<option value="Palestine">Palestine</option>
+						<option value="Paraguay">Paraguay</option>
+						<option value="Peru">Peru</option>
+						<option value="Philippines">Philippines</option>
+						<option value="Poland">Poland</option>
+						<option value="Portugal">Portugal</option>
+						<option value="Qatar">Qatar</option>
+						<option value="Romania">Romania</option>
+						<option value="Russia">Russia</option>
+						<option value="Rwanda">Rwanda</option>
+						<option value="S. Korea">S. Korea</option>
+						<option value="Saudi Arabia">Saudi Arabia</option>
+						<option value="Senegal">Senegal</option>
+						<option value="Serbia">Serbia</option>
+						<option value="Singapore">Singapore</option>
+						<option value="Slovenia">Slovenia</option>
+						<option value="Somalia">Somalia</option>
+						<option value="South Africa">South Africa</option>
+						<option value="Spain">Spain</option>
+						<option value="Sri Lanka">Sri Lanka</option>
+						<option value="Sudan">Sudan</option>
+						<option value="Sweden">Sweden</option>
+						<option value="Switzerland">Switzerland</option>
+						<option value="Taiwan">Taiwan</option>
+						<option value="Tanzania">Tanzania</option>
+						<option value="Thailand">Thailand</option>
+						<option value="Togo">Togo</option>
+						<option value="Tunisia">Tunisia</option>
+						<option value="Turkey">Turkey</option>
+						<option value="UAE">UAE</option>
+						<option value="UK">UK</option>
+						<option value="Ukraine">Ukraine</option>
+						<option value="Uruguay">Uruguay</option>
+						<option value="USA">USA</option>
+						<option value="Uzbekistan">Uzbekistan</option>
+						<option value="Vatican City">Vatican City</option>
+						<option value="Venezuela">Venezuela</option>
+						<option value="Vietnam">Vietnam</option>
+						<option value="Zambia">Zambia</option>
+					</select>
+				</div>
+			<div class="col-md-4">
+				<h1>Select country 3</h1>
+						<select id="selected-country-3" name="custom country" class="form-control ">
+							<option value="Total:">Total:</option>
+							<option value="Argentina">Argentina</option>
+							<option value="Australia">Australia</option>
+							<option value="Austria">Austria</option>
+							<option value="Belgium">Belgium</option>
+							<option value="Bolivia">Bolivia</option>
+							<option value="Brazil">Brazil</option>
+							<option value="Bulgaria">Bulgaria</option>
+							<option value="Canada">Canada</option>
+							<option value="Chile">Chile</option>
+							<option value="China">China</option>
+							<option value="Colombia">Colombia</option>
+							<option value="Congo">Congo</option>
+							<option value="Croatia">Croatia</option>
+							<option value="Cuba">Cuba</option>
+							<option value="Czechia">Czechia</option>
+							<option value="Denmark">Denmark</option>
+							<option value="Diamond Princess">Diamond Princess</option>
+							<option value="Egypt">Egypt</option>
+							<option value="Equatorial Guinea">Equatorial Guinea</option>
+							<option value="Ethiopia">Ethiopia</option>
+							<option value="Finland">Finland</option>
+							<option value="France">France</option>
+							<option value="Georgia">Georgia</option>
+							<option value="Germany">Germany</option>
+							<option value="Greece">Greece</option>
+							<option value="Guinea">Guinea</option>
+							<option value="Hong Kong">Hong Kong</option>
+							<option value="Hungary">Hungary</option>
+							<option value="Iceland">Iceland</option>
+							<option value="India">India</option>
+							<option value="Indonesia">Indonesia</option>
+							<option value="Iran">Iran</option>
+							<option value="Iraq">Iraq</option>
+							<option value="Ireland">Ireland</option>
+							<option value="Israel">Israel</option>
+							<option value="Italy">Italy</option>
+							<option value="Ivory Coast">Ivory Coast</option>
+							<option value="Japan">Japan</option>
+							<option value="Jordan">Jordan</option>
+							<option value="Kenya">Kenya</option>
+							<option value="Kuwait">Kuwait</option>
+							<option value="Lebanon">Lebanon</option>
+							<option value="Malaysia">Malaysia</option>
+							<option value="Mexico">Mexico</option>
+							<option value="Montenegro">Montenegro</option>
+							<option value="Morocco">Morocco</option>
+							<option value="Nepal">Nepal</option>
+							<option value="Netherlands">Netherlands</option>
+							<option value="New Zealand">New Zealand</option>
+							<option value="Nigeria">Nigeria</option>
+							<option value="Norway">Norway</option>
+							<option value="Pakistan">Pakistan</option>
+							<option value="Palestine">Palestine</option>
+							<option value="Paraguay">Paraguay</option>
+							<option value="Peru">Peru</option>
+							<option value="Philippines">Philippines</option>
+							<option value="Poland">Poland</option>
+							<option value="Portugal">Portugal</option>
+							<option value="Qatar">Qatar</option>
+							<option value="Romania">Romania</option>
+							<option value="Russia">Russia</option>
+							<option value="Rwanda">Rwanda</option>
+							<option value="S. Korea">S. Korea</option>
+							<option value="Saudi Arabia">Saudi Arabia</option>
+							<option value="Senegal">Senegal</option>
+							<option value="Serbia">Serbia</option>
+							<option value="Singapore">Singapore</option>
+							<option value="Slovenia">Slovenia</option>
+							<option value="Somalia">Somalia</option>
+							<option value="South Africa">South Africa</option>
+							<option value="Spain">Spain</option>
+							<option value="Sri Lanka">Sri Lanka</option>
+							<option value="Sudan">Sudan</option>
+							<option value="Sweden">Sweden</option>
+							<option value="Switzerland">Switzerland</option>
+							<option value="Taiwan">Taiwan</option>
+							<option value="Tanzania">Tanzania</option>
+							<option value="Thailand">Thailand</option>
+							<option value="Togo">Togo</option>
+							<option value="Tunisia">Tunisia</option>
+							<option value="Turkey">Turkey</option>
+							<option value="UAE">UAE</option>
+							<option value="UK">UK</option>
+							<option value="Ukraine">Ukraine</option>
+							<option value="Uruguay">Uruguay</option>
+							<option value="USA">USA</option>
+							<option value="Uzbekistan">Uzbekistan</option>
+							<option value="Vatican City">Vatican City</option>
+							<option value="Venezuela">Venezuela</option>
+							<option value="Vietnam">Vietnam</option>
+							<option value="Zambia">Zambia</option>
+						</select>
+</div>
+			</div>
+			<div class="row">
+						<form id="newsletter-form" method="POST"
+						class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 myform" novalidate>
+						<div class="input-group">
+						<span class="input-group-btn">
+							<button id="country-submit" name="submit" type="submit" class="btn"
+								data-sending-message="Sending..." data-ok-message="Message Sent">Show Stats</button>
+						</span>
+					</div>
+					<input type="hidden" name="submitted" id="submitted2" value="true">
+				</form>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div>
+						<h1>Total Cases per day - Countries 1&2 </h1>
+						<canvas id="canvas" width="500" height="400"> </canvas>
+
+					</div>
+				</div>
+				<div class="row">
+					<div>
+						<h1>Total Cases per day - Country 3</h1>
+						<canvas id="canvas2" width="500" height="400"> </canvas>
+
+					</div>
+				</div>
+			</div>
+			<footer>
+				<p class="text-center copyright">&copy; developped by <a
+						href="https://www.linkedin.com/in/jonathan-gruber-7a3761" target="_blank">Jonathan
+						Gruber</a>.<br>
+				</p>
+			</footer>
+		</div>
+	</div>
+
+
+</body>
+
+</html>
+
